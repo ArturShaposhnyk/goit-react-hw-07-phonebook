@@ -1,0 +1,13 @@
+.container {
+  width: 400px;
+  margin: 15px;
+  padding: 15px;
+}
+.title {
+  font-size: 32px;
+  margin-left: 20px;
+}
+.subTitle {
+  font-size: 28px;
+  margin-left: 20px;
+}

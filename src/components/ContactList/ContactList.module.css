@@ -1,0 +1,27 @@
+.contactList {
+  padding: 0px;
+  margin-left: 20px;
+  width: 422px;
+  list-style-type: disc;
+}
+.contact {
+  display: flex;
+  justify-content: flex-start;
+  gap: 20px;
+  width: 400px;
+  padding-bottom: 10px;
+  align-items: center;
+}
+.deleteButton {
+  display: flex;
+  margin-left: auto;
+  padding: 1px 6px;
+  background-color: transparent;
+  border: 1px solid grey;
+  border-radius: 4px;
+  &:hover {
+    background: rgb(88, 142, 240);
+    color: #ffffff;
+    cursor: pointer;
+  }
+}
