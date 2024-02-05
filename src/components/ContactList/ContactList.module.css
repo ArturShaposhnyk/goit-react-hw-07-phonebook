@@ -20,7 +20,7 @@
   border: 1px solid grey;
   border-radius: 4px;
   &:hover {
-    background: rgb(88, 142, 240);
+    background: black;
     color: #ffffff;
     cursor: pointer;
   }

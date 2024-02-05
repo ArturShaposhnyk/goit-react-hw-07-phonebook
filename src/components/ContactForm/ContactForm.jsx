@@ -8,11 +8,11 @@ import css from './ContactForm.module.css';
 const ContactForm = () => {
   const [name, setName] = useState('');
   const [number, setNumber] = useState('');
+  const [showForm, setShowForm] = useState(true);
 
   const { contacts } = useSelector(selectAllContacts);
   const dispatch = useDispatch();
 
-  // console.log('contacts', contacts)
   const handleChange = e => {
     const { name, value } = e.target;
 
@@ -40,11 +40,11 @@ const ContactForm = () => {
     );
 
     if (isAdded) {
-      alert(`${name}: is already in contacts`);
-      setName('');
-      setNumber('');
+      alert(`${name}: is already in contacts. Please make corrections.`);
+      setShowForm(false);
       return;
     }
+
     dispatch(addContactThunk({ id: nanoid(), name, number }));
     alert(`Contact ${name} has been added to your Contacts`);
     resetForm();
@@ -53,39 +53,52 @@ const ContactForm = () => {
   const resetForm = () => {
     setName('');
     setNumber('');
+    setShowForm(true);
+  };
+
+  const handleAlertClose = () => {
+    setShowForm(true);
   };
 
   return (
     <>
-      <form className={css.contactForm} onSubmit={handleSubmit}>
-        <label className={css.label} htmlFor="example">
-          Name
-        </label>
-        <input
-          className={css.input}
-          name="name"
-          type="text"
-          id="exampleInputEmail1"
-          aria-describedby="emailHelp"
-          value={name}
-          onChange={handleChange}
-          required
-        />
-        <label className={css.label} htmlFor="example">
-          Number
-        </label>
-        <input
-          className={css.input}
-          type="tel"
-          name="number"
-          value={number}
-          onChange={handleChange}
-          required
-        />
-        <button className={css.button} type="submit">
-          Add contact
-        </button>
-      </form>
+      {showForm ? (
+        <form className={css.contactForm} onSubmit={handleSubmit}>
+          <label className={css.label} htmlFor="exampleInputEmail1">
+            Name
+          </label>
+          <input
+            className={css.input}
+            name="name"
+            type="text"
+            id="exampleInputEmail1"
+            aria-describedby="emailHelp"
+            value={name}
+            onChange={handleChange}
+            required
+          />
+          <label className={css.label} htmlFor="exampleInputNumber">
+            Number
+          </label>
+          <input
+            className={css.input}
+            type="tel"
+            name="number"
+            id="exampleInputNumber"
+            value={number}
+            onChange={handleChange}
+            required
+          />
+          <button className={css.button} type="submit">
+            Add contact
+          </button>
+        </form>
+      ) : (
+        <div>
+          <p>Please make corrections to the entered data</p>
+          <button onClick={handleAlertClose}>Close</button>
+        </div>
+      )}
     </>
   );
 };
